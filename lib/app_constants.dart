@@ -1,0 +1,21 @@
+class AppImages {
+  // Hero Image from the Stitch design (Amalfi Coast)
+  static const String onboardingHero = 'https://lh3.googleusercontent.com/aida-public/AB6AXuDMSdqCJ75jtWAexlQyzxqyMcTXznc8R9dKb7iGFRpuNiPbaxhh9ghWfIQ7P0ak25-IDnaiqnie7y8cBC13fWTktT7VYsLW4r7YbSIyCuqBSM0QYQ591Xkl2Kq3yrMRDB36T6ZUEQrVx3BWxBq0yQOlGoN0zavyjbeddnM4iEsl3h5Dt2HPjngMfqwRwbFC2ehms4D2Fu4f9YfVNaAMScpNulhJ9g83EqwIFXUaCbQ5noN3uIWY35V3Fw';
+
+  // Login Background (Soft landscape)
+  static const String loginBg = 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2070&auto=format&fit=crop';
+
+  // Profile Picture (Editorial headshot)
+  static const String profilePic = 'https://lh3.googleusercontent.com/aida-public/AB6AXuDPX2JuwrDa4As-eGhJE0Htw2AkNYneZn9TyIO-PtuDTDKe9-nrfyLOPZeYzEw15_lNOLKwJfdOC0FuqFNszm__Yr_dojo9n893Dcc-w0JljtT2y4kydy-2F5psxxtM5-6IqUOfdEQIHmyA089LWSHhsvOcVQPpZQP94CVtzIL00nNBs-8iRi57WFkJQWpssXe8Bi0P4aGQ4PHV8PKqzwMu-1Tyn70_VH_xmsKkcNGh6ctUu1Ba1m55Kg';
+
+  // Discoveries (Editorial photography)
+  static const String kyoto = 'https://lh3.googleusercontent.com/aida-public/AB6AXuDAG_uuKczUDy8S9a11nODQNOY1TsqVbv4NmgowsZUaYunC8SaYQX5GMnSXlX-BibrOf7HgqxeLlBRVPwlhrevZ1mUCACwI6VwV53VmySkaHek-5-oB93KbD5aqcIvdLoYWDJAajjwsbRFfv_uSgGmKQ2y9OdR_mtsNz1K2nAp5owW3mNrNaZlU_tBWF4Nx0TpM4fn5pQ1gz3KcF4Nn-kkrSsTQBos1AkKBqzLS4TH9fZ76l9AI1EIGtw';
+  static const String amalfi = 'https://lh3.googleusercontent.com/aida-public/AB6AXuA87tV7ShhQO2cHg5TE48y190Zj6p9jFERLpcC5Qc62GxSoO6eN8jBbfIDMSwO-OcNcBAjXnTnEiCELNvZCVlJQSd55TVrslmhrGNVESnPjsLIKdSrb1rrDDqdMIJ-zNZMAnioAiRaxecwUWwL2a9UzSgwa7TP1chYxN8igD9XjA02dNmM0Ad148myNloR8iQzXBSq0CjFTsUkiUuvwt9A2QplRO103aqMyownFZ3KpGecI6978xG0klA';
+  static const String iceland = 'https://lh3.googleusercontent.com/aida-public/AB6AXuACllLqf6fATQP3TiKF-UrMA1UnpGnw_1VUAAcWZeCUcFtkQ0_GeZIMTFn3YIwQtPg9MZAKcO70-kWkgcuEyCECIFZpBul-Ds_MBD-BKkoK5HdmrDwEX6jw3uyWN1Ux4xIqy9jzK7vMzFDFzSYKE19FV0arwkRdI1tmsfaluRTHQQVRRtRxk-hZH9hAdpJgpuYbpdBwK59LL1xch2JMbbPBQmGkndKiMUY-hgCXY_v-mMt-cY57OwVnvA';
+
+  // Festivals (Vibrant and atmospheric)
+  static const String lanterns = 'https://lh3.googleusercontent.com/aida-public/AB6AXuBX9UW_lHB6iiteV1DGLKxhXXqkPyTqCktMSf79x0sQ7kwAyzb_d1L460Sa_uB-0QzJIqGx_i7_CmLCp0mEz6OT2UDvTKevYTiZUS53ROikAnHsrMhMe7iGJ4H6Om1PPf3-rO5BBnSNHTmbn7Weam96iTU-poWzHzJnNWrzi31xJLcr2NFHPm-dRo5b1wWzfu42MlbXVuMfQdQPrXNciuPUWuscRqRyibk-e1zvzE1IJXUQ2MCKaN6phA';
+  static const String venice = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCdlbaD4H9wFaEER-OoTmJSZ9-4C2fgJ51alBVIpdcIK1YvnS5AGxZ0-Pa1cESHOLIzkM6BG-A3TZcQMrjrOeLTE-SZI0a4LBKxWMNb8-h-0_nKlXdHmEwuRuqyM4NDch2cwclzEx0H04TVTCOOirNJfvtkXZ-kM-5yZVPkX8WJ2Bii-w_LC49sBhgxotr5Jcem-9EewLhVQDFzoiff4k9Quimc_kew9Oq6qGP2j2WV6EzYt6FOq6U8kQ';
+  static const String holi = 'https://lh3.googleusercontent.com/aida-public/AB6AXuBRjzQyXFHQONrxHE2viv5CdpHqKkp26fvveqQk5Kbl6waU5-yFdzsvnVsGMeMSKa-00dW4ZZor2avJ8vIDA75OYwmpTP_kc5kSSVdlJMmGUiWk09hIDHDV3R4wN0J-6AK8A3lQriPYgY90mAVDOvUs_oob1z-3BU5k22D1wG8ZY6MKVNz-iy-qAT3EoOHMc2St1R4OAIEacGr9Lbqi8PDUz9Jj5VntdJrQuDR-qUm7o2X8EpaJqXq9Tg';
+  static const String sakura = 'https://lh3.googleusercontent.com/aida-public/AB6AXuDiN6e3rJAaxsKQugcmKZUz-lTzENt-7YaH7O_k0zSotrRptZyTePHTCaO7mAiJJsLJjLEgjw9PxdcEH0YWW0Q0Fv5hFAuytBraRafzqVt9wn-Ait3-70c1hEw3vJTfPaSMLYhBNesQ5OSRPdsPHlgtnAYg4w8LGW5whKs3UzzWHb_ypiUZp_yrEuK_CNdh47Roll9zQV5OBPxSLOy0JO1eqEsbh45VRBRjA12iFPAy3raW9dvCoTpzcA';
+}
