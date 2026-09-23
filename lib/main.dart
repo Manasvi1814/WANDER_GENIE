@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
-// import 'screens/wander_genie_screen.dart';
-// import 'screens/login_screen.dart';
-import 'screens/third_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'screens/wander_genie_screen.dart';
+import 'app_constants.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   runApp(const MyApp());
 }
 
@@ -16,15 +22,15 @@ class MyApp extends StatelessWidget {
       title: 'Wander Genie',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF8D4B38)),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: AppColors.primary,
+          primary: AppColors.primary,
+          surface: AppColors.surface,
+        ),
+        textTheme: GoogleFonts.dmSansTextTheme(),
         useMaterial3: true,
-        // You can uncomment the font family line if you add a serif font to your assets
-        // fontFamily: 'Serif', 
       ),
-      // // To preview other screens, change the home widget below:
-      // home: const LoginScreen(),
-      home: const ThirdScreen(),
-      // home: const WanderGenieScreen(),
+      home: const WanderGenieScreen(),
     );
   }
 }

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import '../app_constants.dart';
+import '../widgets/app_drawer.dart';
+import 'my_trips_screen.dart';
+import 'plan_trip_destination_screen.dart';
+import 'expenses_screen.dart';
 
 class ThirdScreen extends StatelessWidget {
   const ThirdScreen({super.key});
@@ -11,22 +15,29 @@ class ThirdScreen extends StatelessWidget {
     const Color surfaceColor = Color(0xFFFBF9F4);
     const Color onSurfaceVariant = Color(0xFF53433E);
     const Color surfaceContainerHigh = Color(0xFFEAE8E3);
-    const Color primaryFixedDim = Color(0xFFB59BFF); // Approximate for the blur effect
+    const Color primaryFixedDim = Color(
+      0xFFB59BFF,
+    ); // Approximate for the blur effect
     const Color secondaryFixed = Color(0xFFBFEBEC);
 
     return Scaffold(
       backgroundColor: surfaceColor,
+      drawer: const AppDrawer(),
       appBar: AppBar(
         backgroundColor: surfaceColor.withOpacity(0.8),
         elevation: 0,
         scrolledUnderElevation: 0,
         toolbarHeight: 64,
         leadingWidth: 56,
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 16.0),
-          child: IconButton(
-            icon: const Icon(Icons.menu, color: primaryColor),
-            onPressed: () {},
+        leading: Builder(
+          builder: (context) => Padding(
+            padding: const EdgeInsets.only(left: 16.0),
+            child: IconButton(
+              icon: const Icon(Icons.menu, color: primaryColor),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+            ),
           ),
         ),
         title: const Text(
@@ -61,7 +72,8 @@ class ThirdScreen extends StatelessWidget {
                 child: Image.network(
                   AppImages.profilePic,
                   fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) => const Icon(Icons.person),
+                  errorBuilder: (context, error, stackTrace) =>
+                      const Icon(Icons.person),
                 ),
               ),
             ),
@@ -73,7 +85,13 @@ class ThirdScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // 1. Search / Entry Point
-            _buildSearchSection(surfaceContainerHigh, primaryColor, primaryFixedDim, secondaryFixed),
+            _buildSearchSection(
+              context,
+              surfaceContainerHigh,
+              primaryColor,
+              primaryFixedDim,
+              secondaryFixed,
+            ),
 
             // 2. Recommendations Feed
             _buildRecommendationsSection(primaryColor, onSurfaceVariant),
@@ -92,11 +110,17 @@ class ThirdScreen extends StatelessWidget {
         elevation: 8,
         child: const Icon(Icons.auto_awesome, color: Colors.white, size: 28),
       ),
-      bottomNavigationBar: _buildBottomNav(surfaceColor),
+      bottomNavigationBar: _buildBottomNav(context, surfaceColor),
     );
   }
 
-  Widget _buildSearchSection(Color bg, Color primary, Color blur1, Color blur2) {
+  Widget _buildSearchSection(
+    BuildContext context,
+    Color bg,
+    Color primary,
+    Color blur1,
+    Color blur2,
+  ) {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Container(
@@ -159,10 +183,7 @@ class ThirdScreen extends StatelessWidget {
                   const Text(
                     'The "Genie" is ready to curate your next meaningful journey.',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Color(0xFF53433E),
-                      fontSize: 16,
-                    ),
+                    style: TextStyle(color: Color(0xFF53433E), fontSize: 16),
                   ),
                   const SizedBox(height: 32),
                   // Search Input
@@ -181,27 +202,50 @@ class ThirdScreen extends StatelessWidget {
                     child: Row(
                       children: [
                         const SizedBox(width: 16),
-                        const Icon(Icons.auto_awesome, color: Color(0xFF894B35)),
+                        const Icon(
+                          Icons.auto_awesome,
+                          color: Color(0xFF894B35),
+                        ),
                         const Expanded(
                           child: TextField(
                             decoration: InputDecoration(
-                              hintText: 'Tell the Genie: "A 4-day food tour in Lisbon"...',
-                              hintStyle: TextStyle(color: Color(0xFF86736D), fontSize: 14),
+                              hintText:
+                                  'Tell the Genie: "A 4-day food tour in Lisbon"...',
+                              hintStyle: TextStyle(
+                                color: Color(0xFF86736D),
+                                fontSize: 14,
+                              ),
                               border: InputBorder.none,
-                              contentPadding: EdgeInsets.symmetric(horizontal: 12),
+                              contentPadding: EdgeInsets.symmetric(
+                                horizontal: 12,
+                              ),
                             ),
                           ),
                         ),
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const PlanTripDestinationScreen(),
+                              ),
+                            );
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: primary,
                             foregroundColor: Colors.white,
                             shape: const StadiumBorder(),
                             elevation: 0,
-                            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 24,
+                              vertical: 12,
+                            ),
                           ),
-                          child: const Text('Plan', style: TextStyle(fontWeight: FontWeight.w500)),
+                          child: const Text(
+                            'Plan',
+                            style: TextStyle(fontWeight: FontWeight.w500),
+                          ),
                         ),
                       ],
                     ),
@@ -250,7 +294,10 @@ class ThirdScreen extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {},
-                child: Text('View Editorial', style: TextStyle(color: primary, fontWeight: FontWeight.w600)),
+                child: Text(
+                  'View Editorial',
+                  style: TextStyle(color: primary, fontWeight: FontWeight.w600),
+                ),
               ),
             ],
           ),
@@ -288,7 +335,13 @@ class ThirdScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildDiscoveryCard(String image, String tag, Color tagColor, String title, String desc) {
+  Widget _buildDiscoveryCard(
+    String image,
+    String tag,
+    Color tagColor,
+    String title,
+    String desc,
+  ) {
     return Container(
       width: 280,
       margin: const EdgeInsets.all(8),
@@ -301,23 +354,27 @@ class ThirdScreen extends StatelessWidget {
               children: [
                 AspectRatio(
                   aspectRatio: 4 / 5,
-                  child: Image.network(
-                    image,
-                    fit: BoxFit.cover,
-                  ),
+                  child: Image.network(image, fit: BoxFit.cover),
                 ),
                 Positioned(
                   top: 12,
                   left: 12,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
                     decoration: BoxDecoration(
                       color: tagColor,
                       borderRadius: BorderRadius.circular(100),
                     ),
                     child: Text(
                       tag,
-                      style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
@@ -329,7 +386,11 @@ class ThirdScreen extends StatelessWidget {
             title,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: const TextStyle(fontFamily: 'Serif', fontSize: 20, fontWeight: FontWeight.bold),
+            style: const TextStyle(
+              fontFamily: 'Serif',
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           const SizedBox(height: 4),
           Text(
@@ -354,7 +415,11 @@ class ThirdScreen extends StatelessWidget {
             children: [
               const Text(
                 'Trending Festivals',
-                style: TextStyle(fontFamily: 'Serif', fontSize: 24, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontFamily: 'Serif',
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               Row(
                 children: [
@@ -371,10 +436,34 @@ class ThirdScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Row(
             children: [
-              _buildFestivalItem(AppImages.lanterns, 'Yi Peng Lanterns', 'Chiang Mai, Thailand', 'Nov 15', primary),
-              _buildFestivalItem(AppImages.venice, 'Carnevale di Venezia', 'Venice, Italy', 'Feb 11', primary),
-              _buildFestivalItem(AppImages.holi, 'Holi Festival', 'Mathura, India', 'Mar 25', primary),
-              _buildFestivalItem(AppImages.sakura, 'Sakura Matsuri', 'Tokyo, Japan', 'Apr 02', primary),
+              _buildFestivalItem(
+                AppImages.lanterns,
+                'Yi Peng Lanterns',
+                'Chiang Mai, Thailand',
+                'Nov 15',
+                primary,
+              ),
+              _buildFestivalItem(
+                AppImages.venice,
+                'Carnevale di Venezia',
+                'Venice, Italy',
+                'Feb 11',
+                primary,
+              ),
+              _buildFestivalItem(
+                AppImages.holi,
+                'Holi Festival',
+                'Mathura, India',
+                'Mar 25',
+                primary,
+              ),
+              _buildFestivalItem(
+                AppImages.sakura,
+                'Sakura Matsuri',
+                'Tokyo, Japan',
+                'Apr 02',
+                primary,
+              ),
             ],
           ),
         ),
@@ -382,7 +471,13 @@ class ThirdScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildFestivalItem(String image, String title, String loc, String date, Color primary) {
+  Widget _buildFestivalItem(
+    String image,
+    String title,
+    String loc,
+    String date,
+    Color primary,
+  ) {
     return Container(
       width: 240,
       margin: const EdgeInsets.symmetric(horizontal: 8),
@@ -405,13 +500,20 @@ class ThirdScreen extends StatelessWidget {
               Expanded(
                 child: Text(
                   title,
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
               Text(
                 date,
-                style: TextStyle(color: primary, fontSize: 12, fontWeight: FontWeight.w500),
+                style: TextStyle(
+                  color: primary,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ],
           ),
@@ -436,16 +538,13 @@ class ThirdScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildBottomNav(Color bg) {
+  Widget _buildBottomNav(BuildContext context, Color bg) {
     return Container(
       decoration: BoxDecoration(
         color: const Color(0xFFF0EEE9),
         borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
         boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-          ),
+          BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10),
         ],
       ),
       child: SafeArea(
@@ -454,10 +553,9 @@ class ThirdScreen extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _buildNavItem(Icons.explore, 'Home', true),
-              _buildNavItem(Icons.map, 'Trips', false),
-              _buildNavItem(Icons.payments, 'Expenses', false),
-              _buildNavItem(Icons.person, 'Profile', false),
+              _buildNavItem(context, Icons.explore, 'Home', true),
+              _buildNavItem(context, Icons.map, 'Trips', false),
+              _buildNavItem(context, Icons.payments, 'Expenses', false),
             ],
           ),
         ),
@@ -465,32 +563,54 @@ class ThirdScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildNavItem(IconData icon, String label, bool active) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      decoration: active
-          ? BoxDecoration(
-              color: const Color(0xFFBFEBEC),
-              borderRadius: BorderRadius.circular(100),
-            )
-          : null,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            icon,
-            color: active ? const Color(0xFF234D4F) : const Color(0xFF53433E),
-            size: 24,
-          ),
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 10,
-              fontWeight: active ? FontWeight.bold : FontWeight.normal,
+  Widget _buildNavItem(
+    BuildContext context,
+    IconData icon,
+    String label,
+    bool active,
+  ) {
+    return GestureDetector(
+      onTap: () {
+        if (label == 'Trips') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const MyTripsScreen()),
+          );
+        } else if (label == 'Expenses') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const ExpensesScreen()),
+          );
+        }
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        decoration: active
+            ? BoxDecoration(
+                color: const Color(0xFFBFEBEC),
+                borderRadius: BorderRadius.circular(100),
+              )
+            : null,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              icon,
               color: active ? const Color(0xFF234D4F) : const Color(0xFF53433E),
+              size: 24,
             ),
-          ),
-        ],
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 10,
+                fontWeight: active ? FontWeight.bold : FontWeight.normal,
+                color: active
+                    ? const Color(0xFF234D4F)
+                    : const Color(0xFF53433E),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

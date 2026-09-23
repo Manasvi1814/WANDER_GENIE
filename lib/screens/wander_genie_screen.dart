@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../app_constants.dart';
+import 'signup_screen.dart';
 
 class WanderGenieScreen extends StatelessWidget {
   const WanderGenieScreen({super.key});
@@ -47,8 +48,20 @@ class WanderGenieScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 64.0),
                   child: isDesktop
-                      ? _buildDesktopLayout(primaryColor, onPrimaryColor, onSurfaceVariant, outlineVariant)
-                      : _buildMobileLayout(primaryColor, onPrimaryColor, onSurfaceVariant, outlineVariant),
+                      ? _buildDesktopLayout(
+                          context,
+                          primaryColor,
+                          onPrimaryColor,
+                          onSurfaceVariant,
+                          outlineVariant,
+                        )
+                      : _buildMobileLayout(
+                          context,
+                          primaryColor,
+                          onPrimaryColor,
+                          onSurfaceVariant,
+                          outlineVariant,
+                        ),
                 ),
 
                 // 3. Subtle Footer (Desktop only)
@@ -73,7 +86,13 @@ class WanderGenieScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildMobileLayout(Color primary, Color onPrimary, Color onSurfaceVariant, Color outlineVariant) {
+  Widget _buildMobileLayout(
+    BuildContext context,
+    Color primary,
+    Color onPrimary,
+    Color onSurfaceVariant,
+    Color outlineVariant,
+  ) {
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -101,21 +120,34 @@ class WanderGenieScreen extends StatelessWidget {
               child: Image.network(
                 AppImages.onboardingHero,
                 fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) => Container(color: Colors.grey[300]),
+                errorBuilder: (context, error, stackTrace) =>
+                    Container(color: Colors.grey[300]),
               ),
             ),
           ),
           // Text Content Section
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 48),
-            child: _buildTextContent(primary, onPrimary, onSurfaceVariant, outlineVariant),
+            child: _buildTextContent(
+              context,
+              primary,
+              onPrimary,
+              onSurfaceVariant,
+              outlineVariant,
+            ),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildDesktopLayout(Color primary, Color onPrimary, Color onSurfaceVariant, Color outlineVariant) {
+  Widget _buildDesktopLayout(
+    BuildContext context,
+    Color primary,
+    Color onPrimary,
+    Color onSurfaceVariant,
+    Color outlineVariant,
+  ) {
     return Row(
       children: [
         // Content (Left)
@@ -126,7 +158,14 @@ class WanderGenieScreen extends StatelessWidget {
             child: Center(
               child: ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 450),
-                child: _buildTextContent(primary, onPrimary, onSurfaceVariant, outlineVariant, isDesktop: true),
+                child: _buildTextContent(
+                  context,
+                  primary,
+                  onPrimary,
+                  onSurfaceVariant,
+                  outlineVariant,
+                  isDesktop: true,
+                ),
               ),
             ),
           ),
@@ -150,7 +189,8 @@ class WanderGenieScreen extends StatelessWidget {
                 child: Image.network(
                   AppImages.onboardingHero,
                   fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) => Container(color: Colors.grey[300]),
+                  errorBuilder: (context, error, stackTrace) =>
+                      Container(color: Colors.grey[300]),
                 ),
               ),
               Container(color: primary.withOpacity(0.05)),
@@ -161,7 +201,14 @@ class WanderGenieScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTextContent(Color primary, Color onPrimary, Color onSurfaceVariant, Color outlineVariant, {bool isDesktop = false}) {
+  Widget _buildTextContent(
+    BuildContext context,
+    Color primary,
+    Color onPrimary,
+    Color onSurfaceVariant,
+    Color outlineVariant, {
+    bool isDesktop = false,
+  }) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -189,11 +236,7 @@ class WanderGenieScreen extends StatelessWidget {
         const SizedBox(height: 32),
         Text(
           'Tailored itineraries that match your rhythm, budget, and spirit.${isDesktop ? " Let our intelligent curator design the moments that linger." : ""}',
-          style: TextStyle(
-            fontSize: 18,
-            color: onSurfaceVariant,
-            height: 1.5,
-          ),
+          style: TextStyle(fontSize: 18, color: onSurfaceVariant, height: 1.5),
         ),
         const SizedBox(height: 48),
         // Action Area
@@ -203,18 +246,35 @@ class WanderGenieScreen extends StatelessWidget {
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SignupScreen()),
+                );
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: primary,
                 foregroundColor: onPrimary,
-                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 40,
+                  vertical: 16,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
                 elevation: 0,
               ),
               child: const Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text('Next', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, letterSpacing: 1)),
+                  Text(
+                    'Next',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 1,
+                    ),
+                  ),
                   SizedBox(width: 8),
                   Icon(Icons.arrow_forward, size: 20),
                 ],
@@ -233,9 +293,23 @@ class WanderGenieScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 12),
-                Container(width: 6, height: 6, decoration: BoxDecoration(color: outlineVariant, shape: BoxShape.circle)),
+                Container(
+                  width: 6,
+                  height: 6,
+                  decoration: BoxDecoration(
+                    color: outlineVariant,
+                    shape: BoxShape.circle,
+                  ),
+                ),
                 const SizedBox(width: 12),
-                Container(width: 6, height: 6, decoration: BoxDecoration(color: outlineVariant, shape: BoxShape.circle)),
+                Container(
+                  width: 6,
+                  height: 6,
+                  decoration: BoxDecoration(
+                    color: outlineVariant,
+                    shape: BoxShape.circle,
+                  ),
+                ),
               ],
             ),
           ],
